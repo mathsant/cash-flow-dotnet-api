@@ -1,4 +1,4 @@
-﻿using CashFlow.Application.UseCases.Expenses.Register;
+﻿using CashFlow.Application.UseCases.Expenses;
 using CashFlow.Communication.Enums;
 using CashFlow.Exception;
 using CommonTestUtilities.Requests;
@@ -10,7 +10,7 @@ public class RegisterExpenseValidatorTests
     [Fact]
     public void Success()
     {
-        var validator = new RegisterExpenseValidator();
+        var validator = new ExpenseValidator();
         var request = RequestExpenseJsonBuilder.Build();
 
         var result = validator.Validate(request);
@@ -24,7 +24,7 @@ public class RegisterExpenseValidatorTests
     [InlineData(null)]
     public void ErrorTitleEmpty(string title)
     {
-        var validator = new RegisterExpenseValidator();
+        var validator = new ExpenseValidator();
         var request = RequestExpenseJsonBuilder.Build();
         request.Title = title;
 
@@ -40,7 +40,7 @@ public class RegisterExpenseValidatorTests
     [InlineData(-10)]
     public void ErrorAmountIsInvalid(decimal amount)
     {
-        var validator = new RegisterExpenseValidator();
+        var validator = new ExpenseValidator();
         var request = RequestExpenseJsonBuilder.Build();
         request.Amount = amount;
 
@@ -53,7 +53,7 @@ public class RegisterExpenseValidatorTests
     [Fact]
     public void ErrorDateInvalid()
     {
-        var validator = new RegisterExpenseValidator();
+        var validator = new ExpenseValidator();
         var request = RequestExpenseJsonBuilder.Build();
         request.Date = DateTime.UtcNow.AddDays(1);
 
@@ -66,9 +66,9 @@ public class RegisterExpenseValidatorTests
     [Fact]
     public void ErrorPaymentTypeInvalid()
     {
-        var validator = new RegisterExpenseValidator();
+        var validator = new ExpenseValidator();
         var request = RequestExpenseJsonBuilder.Build();
-        request.PaymentType = (PaymentTypeEnum)700;
+        request.PaymentType = (PaymentType)700;
 
         var result = validator.Validate(request);
 
