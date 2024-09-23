@@ -123,6 +123,9 @@
   <data name="EXPENSE_CANNOT_FOR_THE_FUTURE_ERROR" xml:space="preserve">
     <value>Les dépenses ne peuvent pas être pour des dates ultérieures</value>
   </data>
+  <data name="EXPENSE_NOT_FOUND" xml:space="preserve">
+    <value>Dépense non trouvée</value>
+  </data>
   <data name="PAYMENT_TYPE_INVALID_ERROR" xml:space="preserve">
     <value>Le mode de paiement n’est pas valide</value>
   </data>
