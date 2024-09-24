@@ -1,6 +1,7 @@
 ﻿using CashFlow.Application.UseCases.Expenses.Delete;
 using CashFlow.Application.UseCases.Expenses.GetAll;
 using CashFlow.Application.UseCases.Expenses.GetById;
+using CashFlow.Application.UseCases.Expenses.GetByMonth;
 using CashFlow.Application.UseCases.Expenses.Register;
 using CashFlow.Application.UseCases.Expenses.Update;
 using CashFlow.Communication.Requests;
@@ -72,6 +73,22 @@ public class ExpensesController : ControllerBase
         [FromBody] RequestExpenseJson request)
     {
         var result = await useCase.Execute(id, request);
+        return Ok(result);
+    }
+
+    [HttpGet("month")]
+    [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status204NoContent)]
+    public async Task<IActionResult> GetByMonth(
+        [FromServices] IGetExpensesByMonthUseCase useCase,
+        [FromQuery] int year,
+        [FromQuery] int month
+        )
+    {
+        var result = await useCase.Execute(year, month);
+
+        if (result.Count == 0) return NoContent();
+
         return Ok(result);
     }
 }
