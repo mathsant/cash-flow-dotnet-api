@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using CashFlow.Communication.Requests;
+using CashFlow.Domain.Entities;
 using CashFlow.Domain.Repositories;
 using CashFlow.Domain.Repositories.Expenses;
 using CashFlow.Exception;
@@ -19,7 +20,7 @@ public class UpdateExpenseUseCase : IUpdateExpenseUseCase
         _repository = repository;
     }
 
-    public async Task Execute(long id, RequestExpenseJson request)
+    public async Task<Expense> Execute(long id, RequestExpenseJson request)
     {
         Validate(request);
 
@@ -32,6 +33,8 @@ public class UpdateExpenseUseCase : IUpdateExpenseUseCase
         _repository.Update(expense);
 
         await _unitOfWork.Commit();
+
+        return expense;
     }
 
     public void Validate(RequestExpenseJson request)

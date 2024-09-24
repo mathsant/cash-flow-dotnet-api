@@ -65,13 +65,13 @@ public class ExpensesController : ControllerBase
     [Route("{id}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
-    [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
+    [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status200OK)]
     public async Task<IActionResult> Update(
         [FromServices] IUpdateExpenseUseCase useCase,
         [FromRoute] long id,
         [FromBody] RequestExpenseJson request)
     {
-        await useCase.Execute(id, request);
-        return NoContent();
+        var result = await useCase.Execute(id, request);
+        return Ok(result);
     }
 }
