@@ -7,4 +7,6 @@ public interface IExpensesReadOnlyRepository
     Task<Expense?> GetById(long id);
 
     Task<List<Expense>> FilterByMonth(DateOnly date);
+
+    Task<List<Expense>> GetBtwDates(DateOnly initalDate, DateOnly endDate);
 }

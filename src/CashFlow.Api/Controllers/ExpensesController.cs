@@ -1,5 +1,6 @@
 ﻿using CashFlow.Application.UseCases.Expenses.Delete;
 using CashFlow.Application.UseCases.Expenses.GetAll;
+using CashFlow.Application.UseCases.Expenses.GetBtwDates;
 using CashFlow.Application.UseCases.Expenses.GetById;
 using CashFlow.Application.UseCases.Expenses.GetByMonth;
 using CashFlow.Application.UseCases.Expenses.Register;
@@ -88,6 +89,22 @@ public class ExpensesController : ControllerBase
         var result = await useCase.Execute(year, month);
 
         if (result.Count == 0) return NoContent();
+
+        return Ok(result);
+    }
+
+    [HttpGet("btw-dates")]
+    [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status204NoContent)]
+    public async Task<IActionResult> GetBtwDates(
+        [FromServices] IGetExpensesBtwDatesUseCase useCase,
+        [FromHeader] DateOnly initialDate,
+        [FromHeader] DateOnly endDate
+        )
+    {
+        var result = await useCase.Execute(initialDate, endDate);
+
+        if (result?.Count == 0) return NoContent();
 
         return Ok(result);
     }

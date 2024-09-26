@@ -65,4 +65,18 @@ internal class ExpensesRepository : IExpensesReadOnlyRepository, IExpensesWriteO
 
         return result;
     }
+
+    public async Task<List<Expense>> GetBtwDates(DateOnly initalDate, DateOnly endDate)
+    {
+        var initalDateFormatted = new DateTime(year: initalDate.Year, month: initalDate.Month, day: initalDate.Day).Date;
+        var endDateFormatted = new DateTime(year: endDate.Year, month: endDate.Month, day: endDate.Day, hour: 23, minute: 59, second: 59);
+
+        var result = await _dbContext
+            .expenses
+            .AsNoTracking()
+            .Where(expense => expense.Date >= initalDateFormatted && expense.Date <= endDateFormatted)
+            .ToListAsync();
+
+        return result;
+    }
 }
