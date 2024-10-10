@@ -120,11 +120,17 @@
   <data name="AMOUNT_MUST_GREATER_THAN_ZERO_ERROR" xml:space="preserve">
     <value>The amount must be greater than zero</value>
   </data>
+  <data name="EMAIL_ALREADY_EXISTS" xml:space="preserve">
+    <value>This email already exists.</value>
+  </data>
   <data name="EXPENSE_CANNOT_FOR_THE_FUTURE_ERROR" xml:space="preserve">
     <value>Expenses cannot be for the future</value>
   </data>
   <data name="EXPENSE_NOT_FOUND" xml:space="preserve">
     <value>Expense not found</value>
+  </data>
+  <data name="PASSWORD_INVALID" xml:space="preserve">
+    <value>Your password must be at least 8 characters long, containing at least one uppercase letter, one lowercase letter, one number, and one special character.</value>
   </data>
   <data name="PAYMENT_TYPE_INVALID_ERROR" xml:space="preserve">
     <value>Payment type is not valid</value>

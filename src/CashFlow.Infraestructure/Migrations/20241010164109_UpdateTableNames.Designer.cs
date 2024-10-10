@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CashFlow.Infraestructure.Migrations
 {
     [DbContext(typeof(CashFlowDbContext))]
-    [Migration("20241004234308_FixUserTable")]
-    partial class FixUserTable
+    [Migration("20241010164109_UpdateTableNames")]
+    partial class UpdateTableNames
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -56,7 +56,7 @@ namespace CashFlow.Infraestructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("expenses");
+                    b.ToTable("Expenses");
                 });
 
             modelBuilder.Entity("CashFlow.Domain.Entities.User", b =>
@@ -68,6 +68,10 @@ namespace CashFlow.Infraestructure.Migrations
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("longtext");
 
@@ -84,7 +88,7 @@ namespace CashFlow.Infraestructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("User");
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("CashFlow.Domain.Entities.Expense", b =>

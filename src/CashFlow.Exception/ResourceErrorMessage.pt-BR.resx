@@ -120,11 +120,17 @@
   <data name="AMOUNT_MUST_GREATER_THAN_ZERO_ERROR" xml:space="preserve">
     <value>O valor deve ser maior que zero</value>
   </data>
+  <data name="EMAIL_ALREADY_EXISTS" xml:space="preserve">
+    <value>Esse e-mail já está cadastrado.</value>
+  </data>
   <data name="EXPENSE_CANNOT_FOR_THE_FUTURE_ERROR" xml:space="preserve">
     <value>Despesa não pode ser para datas futuras</value>
   </data>
   <data name="EXPENSE_NOT_FOUND" xml:space="preserve">
     <value>Despesa não encontrada</value>
+  </data>
+  <data name="PASSWORD_INVALID" xml:space="preserve">
+    <value>Sua senha deve ter no minimo 8 caracteres, contendo pelo menos uma letra maiuscula, uma letra minuscula, um número e um caractere especial.</value>
   </data>
   <data name="PAYMENT_TYPE_INVALID_ERROR" xml:space="preserve">
     <value>Tipo de pagamento não é válido</value>
