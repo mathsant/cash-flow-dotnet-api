@@ -123,6 +123,9 @@
   <data name="EMAIL_ALREADY_EXISTS" xml:space="preserve">
     <value>Esse e-mail já está cadastrado.</value>
   </data>
+  <data name="EMAIL_OR_PASSWORD_INVALID" xml:space="preserve">
+    <value>E-mail ou senha incorretos.</value>
+  </data>
   <data name="EXPENSE_CANNOT_FOR_THE_FUTURE_ERROR" xml:space="preserve">
     <value>Despesa não pode ser para datas futuras</value>
   </data>
