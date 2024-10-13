@@ -10,7 +10,7 @@ using CashFlow.Exception.ExceptionsBase;
 using FluentValidation.Results;
 
 namespace CashFlow.Application.UseCases.Users.Create;
-internal class CreateUserUseCase : ICreateUserUseCase
+public class CreateUserUseCase : ICreateUserUseCase
 {
     private readonly IMapper _mapper;
     private readonly IPasswordCryp _passwordCryp;
