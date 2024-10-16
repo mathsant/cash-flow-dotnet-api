@@ -37,7 +37,7 @@ public class CreateUserUseCaseTest
 
         var result = await act.Should().ThrowAsync<ErrorOnValidationException>();
 
-        result.Where(ex => ex.GetErrors().Count == 1 && ex.GetErrors().Contains("NAME_EMPTY"));
+        result.Where(ex => ex.GetErrors().Count == 1 && ex.GetErrors().Contains(ResourceErrorMessage.NAME_EMPTY));
     }
 
     [Fact]

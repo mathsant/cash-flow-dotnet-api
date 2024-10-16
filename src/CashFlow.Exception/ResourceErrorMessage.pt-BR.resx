@@ -123,6 +123,12 @@
   <data name="EMAIL_ALREADY_EXISTS" xml:space="preserve">
     <value>Esse e-mail já está cadastrado.</value>
   </data>
+  <data name="EMAIL_EMPTY" xml:space="preserve">
+    <value>E-mail está vazio, favor revisar.</value>
+  </data>
+  <data name="EMAIL_INVALID" xml:space="preserve">
+    <value>Esse e-mail é inválido, favor revisar.</value>
+  </data>
   <data name="EMAIL_OR_PASSWORD_INVALID" xml:space="preserve">
     <value>E-mail ou senha incorretos.</value>
   </data>
@@ -131,6 +137,9 @@
   </data>
   <data name="EXPENSE_NOT_FOUND" xml:space="preserve">
     <value>Despesa não encontrada</value>
+  </data>
+  <data name="NAME_EMPTY" xml:space="preserve">
+    <value>Nome está vazio, favor revisar.</value>
   </data>
   <data name="PASSWORD_INVALID" xml:space="preserve">
     <value>Sua senha deve ter no minimo 8 caracteres, contendo pelo menos uma letra maiuscula, uma letra minuscula, um número e um caractere especial.</value>

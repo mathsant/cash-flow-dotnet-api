@@ -30,7 +30,7 @@ public class CreateUserValidatorTest
         var result = validator.Validate(request);
 
         result.IsValid.Should().BeFalse();
-        result.Errors.Should().ContainSingle().And.Contain(e => e.ErrorMessage.Equals("NAME_EMPTY"));
+        result.Errors.Should().ContainSingle().And.Contain(e => e.ErrorMessage.Equals(ResourceErrorMessage.NAME_EMPTY));
     }
 
     [Theory]
@@ -46,7 +46,7 @@ public class CreateUserValidatorTest
         var result = validator.Validate(request);
 
         result.IsValid.Should().BeFalse();
-        result.Errors.Should().ContainSingle().And.Contain(e => e.ErrorMessage.Equals("EMAIL_EMPTY"));
+        result.Errors.Should().ContainSingle().And.Contain(e => e.ErrorMessage.Equals(ResourceErrorMessage.EMAIL_EMPTY));
     }
 
     [Fact]
@@ -59,7 +59,7 @@ public class CreateUserValidatorTest
         var result = validator.Validate(request);
 
         result.IsValid.Should().BeFalse();
-        result.Errors.Should().ContainSingle().And.Contain(e => e.ErrorMessage.Equals("EMAIL_INVALID"));
+        result.Errors.Should().ContainSingle().And.Contain(e => e.ErrorMessage.Equals(ResourceErrorMessage.EMAIL_INVALID));
     }
 
     [Fact]
