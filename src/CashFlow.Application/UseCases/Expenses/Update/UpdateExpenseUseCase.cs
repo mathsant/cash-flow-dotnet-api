@@ -37,6 +37,8 @@ public class UpdateExpenseUseCase : IUpdateExpenseUseCase
         var expense = await _repository.GetById(loggerUser, id);
 
         if (expense is null) throw new NotFoundException(ResourceErrorMessage.EXPENSE_NOT_FOUND);
+        
+        expense.Tags.Clear();
 
         _mapper.Map(request, expense);
 
@@ -47,16 +49,15 @@ public class UpdateExpenseUseCase : IUpdateExpenseUseCase
         return expense;
     }
 
-    public void Validate(RequestExpenseJson request)
+    private void Validate(RequestExpenseJson request)
     {
         var validator = new ExpenseValidator();
 
         var result = validator.Validate(request);
 
-        if (result.IsValid == false)
-        {
-            var errorMessages = result.Errors.Select(f => f.ErrorMessage).ToList();
-            throw new ErrorOnValidationException(errorMessages);
-        }
+        if (result.IsValid != false) return;
+        
+        var errorMessages = result.Errors.Select(f => f.ErrorMessage).ToList();
+        throw new ErrorOnValidationException(errorMessages);
     }
 }

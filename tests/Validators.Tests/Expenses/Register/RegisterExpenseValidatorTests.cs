@@ -75,4 +75,17 @@ public class RegisterExpenseValidatorTests
         result.IsValid.Should().BeFalse();
         result.Errors.Should().ContainSingle().And.Contain(error => error.ErrorMessage.Equals(ResourceErrorMessage.PAYMENT_TYPE_INVALID_ERROR));
     }
+    
+    [Fact]
+    public void ErrorTagInvalid()
+    {
+        var validator = new ExpenseValidator();
+        var request = RequestExpenseJsonBuilder.Build();
+        request.Tags.Add((ExpenseTag)1000);
+
+        var result = validator.Validate(request);
+
+        result.IsValid.Should().BeFalse();
+        result.Errors.Should().ContainSingle().And.Contain(error => error.ErrorMessage.Equals(ResourceErrorMessage.TAG_TYPE_NOT_SUPPORTED_ERROR));
+    }
 }

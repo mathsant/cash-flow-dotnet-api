@@ -153,4 +153,7 @@
   <data name="UNKNOWN_ERROR" xml:space="preserve">
     <value>Erro desconhecido</value>
   </data>
+  <data name="TAG_TYPE_NOT_SUPPORTED_ERROR" xml:space="preserve">
+    <value>Tipo da despesa não suportado.</value>
+  </data>
 </root>
