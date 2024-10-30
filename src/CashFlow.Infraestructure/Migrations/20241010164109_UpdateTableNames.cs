@@ -10,25 +10,13 @@ namespace CashFlow.Infraestructure.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_expenses_User_UserId",
-                table: "expenses");
-
             migrationBuilder.DropPrimaryKey(
                 name: "PK_expenses",
                 table: "expenses");
 
-            migrationBuilder.DropPrimaryKey(
-                name: "PK_User",
-                table: "User");
-
             migrationBuilder.RenameTable(
                 name: "expenses",
                 newName: "Expenses");
-
-            migrationBuilder.RenameTable(
-                name: "User",
-                newName: "Users");
 
             migrationBuilder.RenameIndex(
                 name: "IX_expenses_UserId",
@@ -38,11 +26,6 @@ namespace CashFlow.Infraestructure.Migrations
             migrationBuilder.AddPrimaryKey(
                 name: "PK_Expenses",
                 table: "Expenses",
-                column: "Id");
-
-            migrationBuilder.AddPrimaryKey(
-                name: "PK_Users",
-                table: "Users",
                 column: "Id");
 
             migrationBuilder.AddForeignKey(

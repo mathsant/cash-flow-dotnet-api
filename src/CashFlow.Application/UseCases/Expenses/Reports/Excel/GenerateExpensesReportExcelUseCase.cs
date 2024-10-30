@@ -3,30 +3,35 @@ using CashFlow.Domain.Enums;
 using CashFlow.Domain.Extensions;
 using CashFlow.Domain.Reports;
 using CashFlow.Domain.Repositories.Expenses;
+using CashFlow.Domain.Services.LoggedUser;
 using ClosedXML.Excel;
 
 namespace CashFlow.Application.UseCases.Expenses.Reports.Excel;
 public class GenerateExpensesReportExcelUseCase : IGenerateExpensesReportExcelUseCase
 {
     private const string CURRENCY_SYMBOL = "R$";
-    private const string EXCEL_AUTHOR = "Matheus Silva";
     private const string EXCEL_FONT_NAME = "Roboto Slab";
-    private readonly IExpensesReadOnlyRepository _repository;
 
-    public GenerateExpensesReportExcelUseCase(IExpensesReadOnlyRepository repository)
+    private readonly IExpensesReadOnlyRepository _repository;
+    private readonly ILoggedUser _loggedUser;
+
+    public GenerateExpensesReportExcelUseCase(IExpensesReadOnlyRepository repository, ILoggedUser loggedUser)
     {
         _repository = repository;
+        _loggedUser = loggedUser;
     }
 
     public async Task<byte[]> Execute(DateOnly month)
     {
-        var expenses = await _repository.FilterByMonth(month);
+        var loggedUser = await _loggedUser.Get();
+
+        var expenses = await _repository.FilterByMonth(loggedUser, month);
 
         if (expenses.Count == 0) return [];
 
         using var workbook = new XLWorkbook();
 
-        workbook.Author = EXCEL_AUTHOR;
+        workbook.Author = loggedUser.Name;
         workbook.Style.Font.FontSize = 16;
         workbook.Style.Font.FontName = EXCEL_FONT_NAME;
 

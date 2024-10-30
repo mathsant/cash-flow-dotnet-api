@@ -3,27 +3,23 @@ using CashFlow.Exception;
 using CommonTestUtilities.Requests;
 using FluentAssertions;
 using System.Globalization;
-using System.Net.Http.Headers;
-using System.Net.Http.Json;
 using System.Text.Json;
 using WebApi.Test.InlineData;
 
 namespace WebApi.Test.Login;
-public class DoLoginTest : IClassFixture<CustomWebApplicationFactory>
+public class DoLoginTest : CashFlowClassFixture
 {
     private const string METHOD = "api/login";
 
-    private readonly HttpClient _httpClient;
     private readonly string _email;
     private readonly string _name;
     private readonly string _password;
 
-    public DoLoginTest(CustomWebApplicationFactory webApplicationFactory)
+    public DoLoginTest(CustomWebApplicationFactory webApplicationFactory) : base(webApplicationFactory)
     {
-        _httpClient = webApplicationFactory.CreateClient();
-        _email = webApplicationFactory.GetEmailOfInitialUser();
-        _name = webApplicationFactory.GetNameOfInitialUser();
-        _password = webApplicationFactory.GetPasswordOfInitialUser();
+        _email = webApplicationFactory.User_Team_Member.GetEmail();
+        _name = webApplicationFactory.User_Team_Member.GetName();
+        _password = webApplicationFactory.User_Team_Member.GetPassword();
     }
 
     [Fact]
@@ -35,7 +31,7 @@ public class DoLoginTest : IClassFixture<CustomWebApplicationFactory>
             Password = _password
         };
 
-        var response = await _httpClient.PostAsJsonAsync(METHOD, request);
+        var response = await DoPost(requestUri: METHOD, request: request);
 
         response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
 
@@ -53,8 +49,7 @@ public class DoLoginTest : IClassFixture<CustomWebApplicationFactory>
     {
         var request = RequestLoginJsonBuilder.Build();
 
-        _httpClient.DefaultRequestHeaders.AcceptLanguage.Add(new StringWithQualityHeaderValue(culture));
-        var response = await _httpClient.PostAsJsonAsync(METHOD, request);
+        var response = await DoPost(requestUri: METHOD, request: request, culture: culture);
 
         response.StatusCode.Should().Be(System.Net.HttpStatusCode.Unauthorized);
 
